@@ -6,7 +6,7 @@ export function getOrCreateCollection(address: Address): Collection {
     let collection = Collection.load(collectionAddress)
     if(!collection){
         collection = new Collection(collectionAddress)
-        collection.save
+        collection.save()
     }
     return collection
 }
