@@ -15,7 +15,6 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Collection
-        - Account
         - Sales
       abis:
         - name: LooksRareExchange

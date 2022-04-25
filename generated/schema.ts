@@ -53,6 +53,73 @@ export class Collection extends Entity {
   }
 }
 
+export class Account extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Account entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Account entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Account", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Account | null {
+    return changetype<Account | null>(store.get("Account", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get sales(): Array<string> | null {
+    let value = this.get("sales");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set sales(value: Array<string> | null) {
+    if (!value) {
+      this.unset("sales");
+    } else {
+      this.set("sales", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get buys(): Array<string> | null {
+    let value = this.get("buys");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set buys(value: Array<string> | null) {
+    if (!value) {
+      this.unset("buys");
+    } else {
+      this.set("buys", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+}
+
 export class Sale extends Entity {
   constructor(id: string) {
     super();
