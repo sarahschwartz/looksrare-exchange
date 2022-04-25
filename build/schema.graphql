@@ -2,7 +2,7 @@ type Collection @entity {
   id: ID!
   sales: [Sale!] ! @derivedFrom(field: "collection")
   # Total number of transactions
-  # totalTransactions: BigInt!
+  totalTransactions: BigInt!
   # # Total number of taker bid transactions
   # totalTakerBidTransactions: BigInt!
   # # Total number of taker ask transactions

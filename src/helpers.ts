@@ -1,11 +1,16 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { Collection, Sale, Account } from "../generated/schema";
+import {integer } from '@protofire/subgraph-toolkit'
 
 export function getOrCreateCollection(address: Address): Collection {
     const collectionAddress = address.toHex()
     let collection = Collection.load(collectionAddress)
     if(collection == null){
         collection = new Collection(collectionAddress)
+        collection.totalTransactions = integer.ONE
+        collection.save()
+    } else{
+        collection.totalTransactions = integer.increment(collection.totalTransactions)
         collection.save()
     }
     return collection

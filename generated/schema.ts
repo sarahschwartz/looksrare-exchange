@@ -15,6 +15,8 @@ export class Collection extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("totalTransactions", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
@@ -50,6 +52,15 @@ export class Collection extends Entity {
 
   set sales(value: Array<string>) {
     this.set("sales", Value.fromStringArray(value));
+  }
+
+  get totalTransactions(): BigInt {
+    let value = this.get("totalTransactions");
+    return value!.toBigInt();
+  }
+
+  set totalTransactions(value: BigInt) {
+    this.set("totalTransactions", Value.fromBigInt(value));
   }
 }
 
