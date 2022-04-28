@@ -1,6 +1,6 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { Collection, Sale, Account } from "../generated/schema";
-import {integer } from '@protofire/subgraph-toolkit'
+import { integer } from '@protofire/subgraph-toolkit'
 
 export function getOrCreateCollection(address: Address): Collection {
     const collectionAddress = address.toHex()
