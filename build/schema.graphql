@@ -1,26 +1,19 @@
 type Collection @entity {
   id: ID!
+  # All sales of collection items
   sales: [Sale!] ! @derivedFrom(field: "collection")
   # Total number of transactions
   totalTransactions: BigInt!
-  # # Total number of taker bid transactions
-  # totalTakerBidTransactions: BigInt!
-  # # Total number of taker ask transactions
-  # totalTakerAskTransactions: BigInt!
-  # # Total volume of collection (in ETH)
-  # totalVolume: BigDecimal!
-  # # Total taker bid volume (in ETH)
-  # totalTakerBidVolume: BigDecimal!
-  # # Total taker ask volume (in ETH)
-  # totalTakerAskVolume: BigDecimal!
-  # # Total royalty paid (in ETH)
-  # totalRoyaltyPaid: BigDecimal!
 }
 
 type Account @entity {
   id: ID!
+  # All account sales
   sales: [Sale!] @derivedFrom(field: "seller")
+  # All account buys
   buys: [Sale!] @derivedFrom(field: "buyer")
+  # Total number of transactions
+  totalTransactions: BigInt!
 }
 
 

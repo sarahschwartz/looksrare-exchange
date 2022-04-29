@@ -68,6 +68,8 @@ export class Account extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("totalTransactions", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
@@ -128,6 +130,15 @@ export class Account extends Entity {
     } else {
       this.set("buys", Value.fromStringArray(<Array<string>>value));
     }
+  }
+
+  get totalTransactions(): BigInt {
+    let value = this.get("totalTransactions");
+    return value!.toBigInt();
+  }
+
+  set totalTransactions(value: BigInt) {
+    this.set("totalTransactions", Value.fromBigInt(value));
   }
 }
 

@@ -21,6 +21,10 @@ export function getOrCreateAccount(address: Address): Account {
     let account = Account.load(accountAddress)
     if(account == null){
         account = new Account(accountAddress)
+        account.totalTransactions = integer.ONE
+        account.save()
+    } else{
+        account.totalTransactions = integer.increment(account.totalTransactions)
         account.save()
     }
     return account

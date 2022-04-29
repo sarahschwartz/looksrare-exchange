@@ -12,6 +12,8 @@ type Account @entity {
   sales: [Sale!] @derivedFrom(field: "seller")
   # All account buys
   buys: [Sale!] @derivedFrom(field: "buyer")
+  # Total number of transactions
+  totalTransactions: BigInt!
 }
 
 
